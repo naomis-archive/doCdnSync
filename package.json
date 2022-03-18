@@ -8,7 +8,8 @@
     "lint": "eslint src --max-warnings 0",
     "setup": "node -r dotenv/config prod/setup.js",
     "sync": "node -r dotenv/config prod/sync.js",
-    "test": "echo \"No tests yet\""
+    "test": "echo \"No tests yet\"",
+    "prepublishOnly": "npx rimraf prod/ && npm run build"
   },
   "repository": {
     "type": "git",
@@ -28,7 +29,11 @@
     "eslint-plugin-jsdoc": "^38.0.4",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.6.0",
+    "rimraf": "^3.0.2",
     "typescript": "^4.6.2"
+  },
+  "bin": {
+    "do-cdn-sync": "./prod/bin.js"
   },
   "author": "Naomi Carrigan",
   "license": "AGPL-3.0-or-later",
