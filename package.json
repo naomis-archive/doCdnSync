@@ -1,5 +1,24 @@
 {
+  "name": "do-cdn-sync",
+  "version": "1.0.0",
+  "description": "A simple CLI to sync a directory with DigitalOcean's Spaces",
+  "main": "prod/index.js",
+  "scripts": {
+    "build": "tsc",
+    "setup": "node -r dotenv/config prod/setup.js",
+    "sync": "node -r dotenv/config prod/sync.js",
+    "test": "echo \"No tests yet\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nhcarrigan/do-cdn-sync.git"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.54.1",
+    "dotenv": "^16.0.0"
+  },
   "devDependencies": {
+    "@types/node": "^17.0.21",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
     "eslint": "^8.11.0",
@@ -9,5 +28,11 @@
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.6.0",
     "typescript": "^4.6.2"
-  }
+  },
+  "author": "Naomi Carrigan",
+  "license": "AGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/nhcarrigan/do-cdn-sync/issues"
+  },
+  "homepage": "https://github.com/nhcarrigan/do-cdn-sync#readme"
 }
