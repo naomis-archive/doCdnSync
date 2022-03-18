@@ -11,11 +11,11 @@ import { main as syncMain } from "./sync";
   }
   switch (commandToInvoke) {
     case "setup": {
-      await setupMain({ baseDir: process.cwd() });
+      await setupMain(process.cwd());
       break;
     }
     case "sync": {
-      await syncMain({ baseDir: process.cwd() });
+      await syncMain(process.cwd());
       break;
     }
     default: {
