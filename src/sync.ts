@@ -25,11 +25,10 @@ const s3Client = new S3Client({
 /**.
  * Main method for syncing dir to space
  *
- * @param root0
- * @param root0.baseDir
+ * @param {String} baseDir Base directory to run this command in.
  * @returns {Promise<void>}
  */
-export async function main({ baseDir }: { baseDir: string }) {
+export async function main(baseDir: string) {
   const data = await s3Client.send(
     new ListObjectsCommand({ Bucket: process.env.SPACES_NAME })
   );
