@@ -57,7 +57,7 @@ const s3Client = new S3Client({
       .send(
         new GetObjectCommand({ Bucket: process.env.SPACES_NAME, Key: fileKey })
       )
-      .catch((err) => null);
+      .catch(() => null);
     if (!cdnData) {
       console.log(`${local} is new! Uploading...`);
       const localBuffer = await readFile(local);
