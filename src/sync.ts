@@ -10,27 +10,29 @@ import {
   S3Client,
 } from "@aws-sdk/client-s3";
 
+import { Credentials } from "./interfaces/Credentials";
 import { getLocalFiles } from "./utils/getLocalFiles";
 import { streamToBuffer } from "./utils/streamToBuffer";
 
-const s3Client = new S3Client({
-  endpoint: "https://sfo3.digitaloceanspaces.com",
-  region: "sfo3",
-  credentials: {
-    accessKeyId: process.env.SPACES_KEY as string,
-    secretAccessKey: process.env.SPACES_SECRET as string,
-  },
-});
-
-/**.
- * Main method for syncing dir to space
+/**
+ * Main method for syncing dir to space.
  *
- * @param {String} baseDir Base directory to run this command in.
+ * @param {string} baseDir Base directory to run this command in.
+ * @param {Credentials} credentials Spaces credentials.
  * @returns {Promise<void>}
  */
-export async function main(baseDir: string) {
+export async function main(baseDir: string, credentials: Credentials) {
+  const s3Client = new S3Client({
+    endpoint: `ttps://${credentials.region}.digitaloceanspaces.com`,
+    region: credentials.region,
+    credentials: {
+      accessKeyId: credentials.key,
+      secretAccessKey: credentials.secret,
+    },
+  });
+
   const data = await s3Client.send(
-    new ListObjectsCommand({ Bucket: process.env.SPACES_NAME })
+    new ListObjectsCommand({ Bucket: credentials.name })
   );
   if (!data.Contents) {
     throw new Error("No data");

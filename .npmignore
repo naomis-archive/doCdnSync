@@ -1,0 +1,11 @@
+/.github/
+/src/
+.env
+.eslintrc.json
+.gitattributes
+.prettierrc
+tsconfig.json
+
+# Ignore this for local development
+/content/
+*.tgz
