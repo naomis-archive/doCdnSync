@@ -22,7 +22,13 @@ const s3Client = new S3Client({
   },
 });
 
-(async () => {
+/**.
+ * Main method for syncing dir to space
+ *
+ * @param {String} baseDir Base directory to run this command in.
+ * @returns {Promise<void>}
+ */
+export async function main(baseDir: string) {
   const data = await s3Client.send(
     new ListObjectsCommand({ Bucket: process.env.SPACES_NAME })
   );
@@ -33,7 +39,7 @@ const s3Client = new S3Client({
 
   for (const file of files) {
     const filePath = file.Key?.split("/") || [];
-    const localPath = join(process.cwd(), "content", ...filePath);
+    const localPath = join(baseDir, "content", ...filePath);
     const localStat = await stat(localPath).catch(() => null);
     if (!localStat) {
       console.log(`Deleting ${file.Key}`);
@@ -46,7 +52,7 @@ const s3Client = new S3Client({
     }
   }
 
-  const localFiles = await getLocalFiles();
+  const localFiles = await getLocalFiles(baseDir);
 
   for (const local of localFiles) {
     const splitFileDir = local.split(sep);
@@ -96,4 +102,4 @@ const s3Client = new S3Client({
       })
     );
   }
-})();
+}

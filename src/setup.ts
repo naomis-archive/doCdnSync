@@ -19,8 +19,14 @@ const s3Client = new S3Client({
   },
 });
 
-(async () => {
-  await mkdir(join(process.cwd(), "content"));
+/**.
+ * Main method for setting up dir to space
+ *
+ * @param {String} baseDir Base directory to run this command in.
+ * @returns {Promise<void>}
+ */
+export async function main(baseDir: string) {
+  await mkdir(join(baseDir, "content"));
 
   const data = await s3Client.send(
     new ListObjectsCommand({ Bucket: process.env.SPACES_NAME })
@@ -32,7 +38,7 @@ const s3Client = new S3Client({
 
   for (const file of files) {
     const filePath = file.Key?.split("/").reverse().slice(1).reverse() || [];
-    const localPath = join(process.cwd(), "content", ...filePath);
+    const localPath = join(baseDir, "content", ...filePath);
     const localStat = await stat(localPath).catch(() => null);
     if (!localStat) {
       await mkdir(localPath);
@@ -48,6 +54,6 @@ const s3Client = new S3Client({
     }
     const body = response.Body as Readable;
     const data = await streamToBuffer(body);
-    await writeFile(join(process.cwd(), "content", file.Key as string), data);
+    await writeFile(join(baseDir, "content", file.Key as string), data);
   }
-})();
+}

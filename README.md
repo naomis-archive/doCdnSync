@@ -2,7 +2,10 @@
 
 This is a simple CDN tool to create a "syncable" directory locally and connect it to a DigitalOcean Spaces instance.
 
-To get started, clone this project locally (somewhere convenient, as the project will also hold your CDN files). Then run `npm ci` to install the dependencies, and `npm run build` to compile the TypeScript.
+To get started, you have two choices:
+
+- Install from NPM (`npm i do-cdn-sync`)
+- clone this project locally (somewhere convenient, as the project will also hold your CDN files). Then run `npm ci` to install the dependencies, and `npm run build` to compile the TypeScript.
 
 You'll need to create a Spaces key set. Log in to your DigitalOcean dashboard, and select `API` from the sidebar. Under "Spaces access keys", generate your new key. Now, copy the `sample.env` file to a `.env` file in your cloned project, and fill in the values. The `SPACES_KEY` will be your new key, and the `SPACES_SECRET` will be your new secret. Your `SPACES_NAME` value will be the name of your DigitalOcean Space.
 
