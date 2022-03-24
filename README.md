@@ -1,5 +1,7 @@
 # DigitalOcean CDN Sync
 
+> NOTE: Currently, all files uploaded to your Space with this tool will be marked as public read-only.
+
 This is a simple CDN tool to create a "syncable" directory locally and connect it to a DigitalOcean Spaces instance.
 
 To get started, install this package globally with `npm i -g do-cdn-sync`. Then, navigate to the directory you'd like to hold your Spaces files and create a `.env` file with the following values:
